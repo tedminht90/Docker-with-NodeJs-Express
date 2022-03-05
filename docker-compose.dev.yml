@@ -1,0 +1,24 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "3000:80" # 3000 port nodejs : 80 port nginx
+  node-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/app #share code local with container
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=admin #truyen bien MONGO_USER -> environment trong container -> config.js se lay o env
+      - MONGO_PASSWORD=password #truyen bien MONGO_PASSWORD -> environment trong container -> config.js se lay o env
+      - SESSION_SECRET=secret
+    command: npm run dev
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
