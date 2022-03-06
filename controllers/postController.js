@@ -1,5 +1,6 @@
 const Post = require("../models/postModel");
 
+// Hàm lấy dữ liệu tất cả các bài post
 exports.getAllPosts = async (req, res, next) => {
   try {
     const posts = await Post.find();
@@ -16,7 +17,7 @@ exports.getAllPosts = async (req, res, next) => {
     });
   }
 };
-
+//Lấy 1 bài post dựa vào id
 //localhost:3000/posts/:id
 exports.getOnePost = async (req, res, next) => {
   try {
@@ -33,6 +34,7 @@ exports.getOnePost = async (req, res, next) => {
     });
   }
 };
+//Tạo 1 bài post
 exports.createPost = async (req, res, next) => {
   try {
     const post = await Post.create(req.body);
@@ -49,7 +51,7 @@ exports.createPost = async (req, res, next) => {
     });
   }
 };
-
+//Sửa lại bài post
 exports.updatePost = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
@@ -68,7 +70,7 @@ exports.updatePost = async (req, res, next) => {
     });
   }
 };
-
+//Xoá bài post
 exports.deletePost = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.id);

@@ -4,7 +4,7 @@ services:
     ports:
       - "80:80" # 80 : 80 port nginx
   node-app:
-    deploy:
+    deploy: #Config Swarm
       replicas: 8
       restart_policy:
         condition: any
@@ -16,7 +16,7 @@ services:
       args:
         NODE_ENV: production
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=production # sử dụng kiểu production được định nghĩa trong Dockerfile
       - MONGO_USER=${MONGO_USER} #truyen bien MONGO_USER -> environment trong container -> config.js se lay o env
       - MONGO_PASSWORD=${MONGO_PASSWORD} #truyen bien MONGO_PASSWORD -> environment trong container -> config.js se lay o env
       - SESSION_SECRET=${SESSION_SECRET}

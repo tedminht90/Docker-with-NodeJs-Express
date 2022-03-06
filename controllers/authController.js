@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
-
+//Mã hoá
 const bcrypt = require("bcryptjs");
-
+//Hàm đăng ký
 exports.signUp = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -26,7 +26,7 @@ exports.signUp = async (req, res) => {
     });
   }
 };
-
+//Hàm đăng nhập
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   try {
