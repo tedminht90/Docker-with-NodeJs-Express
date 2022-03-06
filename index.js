@@ -16,7 +16,7 @@ const {
   SESSION_SECRET,
   REDIS_PORT,
 } = require("./config/config");
-
+//npm redis sử dụng là phiên bản 3.0.0
 let redisClient = createClient({
   host: REDIS_URL,
   port: REDIS_PORT,
@@ -30,7 +30,7 @@ const app = express();
 //192.168.80.2 ipadress container mongo, check ip: docker inspect IDcontainer
 //Can check docker network ls -> NAME mongo
 const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-
+//Kết nối CSDL mongoDB
 const connectWithRetry = () => {
   mongoose
     //   .connect("mongodb://admin:password@mongo:27017/?authSource=admin")
@@ -43,8 +43,11 @@ const connectWithRetry = () => {
 };
 
 connectWithRetry();
+
 app.enable("trust proxy");
+//Sử dụng cors
 app.use(cors({}));
+//Sử dụng redis tạo session cho kết nối
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
